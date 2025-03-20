@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public bool isIdle = true;
+    //public bool isIdle = true;
     public GameObject obstaclePrefab;
     private Vector3 spawnPos = new Vector3(25, 0, 0);
     //private float startDelay = 2.0f;
     //private float repeatRate = 2.0f;
     private PlayerController playerControllerScript;
+    private float timer = 2.0f;
 
     void Start()
     {
@@ -19,10 +20,16 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        if (isIdle)
+        // if (isIdle)
+        // {
+        //     Invoke("SpawnObstacle", Random.Range(0.0f, 1.0f));
+        //     isIdle = false;
+        // }
+        timer -= Time.deltaTime;
+        if (timer <= 0)
         {
-            Invoke("SpawnObstacle", Random.Range(0.0f, 1.0f));
-            isIdle = false;
+            Invoke("SpawnObstacle", 0);
+            timer = Random.Range(0.7f, 2.5f);
         }
     }
 
